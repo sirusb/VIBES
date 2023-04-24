@@ -6,19 +6,33 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of VMC is to …
+Welcome to the homepage of `VMC` package!
+
+This package computes clusters of biological significance from vaginal
+microbiome profiles.
+
+## Description
+
+The package works with three types of input data: matrix, dataframe and
+phyloseq. It consists of 4 functions: \* 3 internal: *get_data:
+*clr_transformation: *model_predict: * 1 one available to the user:
+\*get_cluster:
 
 ## Installation
 
-You can install the development version of VMC from
-[GitHub](https://github.com/) with:
+You only need to call `install_github` function in `devtools` to install
+`VMC`. Be aware of package dependencies.
 
 ``` r
-# install.packages("devtools")
+# First install devtools
+install.packages("devtools")
+# Install VMC from github
 devtools::install_github("DiegoFE94/VMC")
 ```
 
-## Example
+## Start
+
+This
 
 This is a basic example which shows you how to solve a common problem:
 
