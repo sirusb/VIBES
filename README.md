@@ -17,10 +17,16 @@ The package works with three types of input data: matrix, dataframe and
 phyloseq. It consists of 4 functions:
 
 - Item 1
-- Item 2
-- Item 3
-  - Sub Item 1
-  - Sub Item 2
+
+- 3 internal
+
+  - get_data
+  - clr_transformation
+  - model_predict
+
+- 1 available to the user
+
+  - get_cluster
 
 ## Installation
 
