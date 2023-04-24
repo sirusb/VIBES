@@ -1,11 +1,32 @@
 Package: VMC
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Vaginal Microbiome Cluster
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(
+    person(given = "Diego",
+           family = "Fernández-Edreira",
+           role = c("aut", "cre", "cph"),
+           email = "diego.fedreira@udc.es"),
+    person(given = "Josel",
+           family = "Liñares-Blanco",
+           role = c("ctb"),
+           email = "joselb1993@gmail.com"),
+    person(given = "Carlos",
+           family = "Fernandez-Lozano",
+           role = c("ctb"),
+           email = "carlos.fernandez@udc.es")
+    )
+Maintainer: Diego Fernández-Edreira <diego.fedreira@udc.es>
+Description: Model based on the glmnet algorithm to cluster the vaginal
+    microbiome profile from only 20 species.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    glmnet,
+    methods,
+    phyloseq,
+    utils
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.2.3
