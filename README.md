@@ -114,17 +114,3 @@ sample_data(pseq_w_clusters)[1:5,25:30]
 #> SRR903941       NA 4.992614e-26 1.0000000 1.369296e-10 8.586513e-09       IDN
 #> SRR903945       NA 3.820220e-24 0.9941218 1.527713e-07 5.878046e-03       IDN
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
