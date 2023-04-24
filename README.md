@@ -14,9 +14,9 @@ microbiome profiles.
 ## Description
 
 The package works with three types of input data: matrix, dataframe and
-phyloseq. Markup : It consists of 4 functions: \* 3 internal: *get_data:
-*clr_transformation: *model_predict: * 1 available to the user:
-\*get_cluster:
+phyloseq. It consists of 4 functions: - 3 internal: - get_data: -
+clr_transformation: - model_predict: - 1 one available to the user: -
+get_cluster:
 
 ## Installation
 
