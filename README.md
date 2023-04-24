@@ -46,8 +46,14 @@ You only need to call `install_github` function in `devtools` to install
 `VMC`. Be aware of package dependencies.
 
 ``` r
-# First install devtools
+# Installation requires bioconductor and devtools, please use the following commands if you've not
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install()
 install.packages("devtools")
+# Before installing VMC, you need also to install the dependent packages `phyloseq` and `glmnet`
+BiocManager::install("phyloseq")
+install.packages('glmnet')
 # Install VMC from github
 devtools::install_github("DiegoFE94/VMC")
 ```
