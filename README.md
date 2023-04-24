@@ -8,25 +8,37 @@
 
 Welcome to the homepage of `VMC` package!
 
-This package computes clusters of biological significance from vaginal
-microbiome profiles.
+This package computes clusters of biological significance from 20
+species from vaginal microbiome.
 
 ## Description
 
 The package works with three types of input data: matrix, dataframe and
-phyloseq. It consists of 4 functions:
+phyloseq. In case the provided object is a phyloseq the package
+automatically extracts the matrix of interest to execute the rest. In
+case the object is a dataframe or a matrix the samples must be in the
+rows and the species in the columns.
 
-- Item 1
+The 20 species used by the package are as follows, and regardless of the
+object passed must be named as such (`Genus_species`):
+Aerococcus_christensenii, Campylobacter_ureolyticus, Finegoldia_magna,
+Lactobacillus_crispatus, Lactobacillus_gasseri, Porphyromonas_uenonis,
+Prevotella_bivia, Prevotella_timonensis, Atopobium_vaginae,
+Lactobacillus_iners, Prevotella_amnii, Prevotella_disiens,
+Staphylococcus_haemolyticus, Veillonella_montpellierensis,
+Alistipes_finegoldii, Gardnerella_vaginalis, Mycoplasma_hominis,
+Mobiluncus_mulieris, Prevotella_buccalis and Sneathia_sanguinegens.
+
+It consists of 4 functions:
 
 - 3 internal
-
-  - get_data
-  - clr_transformation
-  - model_predict
-
+  - get_data: this function extract a matrix from a phyloseq object
+  - clr_transformation: perform clr transformation (like microbiome
+    package)
+  - model_predict: use our trained model to predict the clusters
 - 1 available to the user
-
-  - get_cluster
+  - get_cluster: uses inner functions to return the user’s original
+    object with cluster memberships added.
 
 ## Installation
 
