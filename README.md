@@ -46,7 +46,7 @@ You only need to call `install_github` function in `devtools` to install
 `VMC`. Be aware of package dependencies.
 
 ``` r
-# Installation requires bioconductor and devtools, please use the following commands if you've not
+# Installation requires bioconductor and devtools, please use the following commands
 if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")
 BiocManager::install()
@@ -60,13 +60,59 @@ devtools::install_github("DiegoFE94/VMC")
 
 ## Start
 
-This
+Before starting the demonstration, you need to load the following
+packages:
+
+    require(phyloseq)
+    require(glmnet)
 
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(VMC)
-## basic example code
+data("example_pseq")
+# Load a pseq with 1657 samples 22 species and 7 taxonomic ranks
+print(example_pseq)
+#> Loading required package: phyloseq
+#> phyloseq-class experiment-level object
+#> otu_table()   OTU Table:         [ 22 taxa and 1657 samples ]
+#> sample_data() Sample Data:       [ 1657 samples by 25 sample variables ]
+#> tax_table()   Taxonomy Table:    [ 22 taxa by 7 taxonomic ranks ]
+#> refseq()      DNAStringSet:      [ 22 reference sequences ]
+# Note that the otu table is made up of the counts
+otu_table(example_pseq)[1:5,1:5]
+#> OTU Table:          [5 taxa and 5 samples]
+#>                      taxa are columns
+#>           Aerococcus_christensenii Alistipes_finegoldii Atopobium_vaginae
+#> SRR902006                     5031                    0              2144
+#> SRR902881                       14                    0                 0
+#> SRR903842                        0                    0                 0
+#> SRR903941                       69                    0                 0
+#> SRR903945                       49                    0                29
+#>           Campylobacter_ureolyticus Finegoldia_magna
+#> SRR902006                         0              279
+#> SRR902881                         0                0
+#> SRR903842                         0                0
+#> SRR903941                         0                0
+#> SRR903945                         0                5
+# Sample data has no info about clusters
+sample_data(example_pseq)[1:5,20:25]
+#>           VAG_ITCH VAG_BURN VAG_DIS MENSTRU1 MENSTRU2 MENSTRU3
+#> SRR902006       NA       NA      NA       NA       NA       NA
+#> SRR902881        0        0       0       NA       NA       NA
+#> SRR903842        0        0       0       NA       NA       NA
+#> SRR903941        0        0       0       NA       NA       NA
+#> SRR903945        0        0       0       NA       NA       NA
+# Compute clusterization
+pseq_w_clusters <- get_clusters(object = example_pseq)
+# Check sample data of the new object 'pseq_w_clusters'
+sample_data(pseq_w_clusters)[1:5,25:30]
+#>           MENSTRU3            N       IDN          IDD            D p_cluster
+#> SRR902006       NA 2.883447e-18 0.9998651 3.257710e-06 1.315948e-04       IDN
+#> SRR902881       NA 7.292814e-24 1.0000000 9.895719e-12 8.154546e-10       IDN
+#> SRR903842       NA 2.211632e-20 1.0000000 3.602075e-10 1.755376e-08       IDN
+#> SRR903941       NA 4.992614e-26 1.0000000 1.369296e-10 8.586513e-09       IDN
+#> SRR903945       NA 3.820220e-24 0.9941218 1.527713e-07 5.878046e-03       IDN
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`?
@@ -82,16 +128,3 @@ summary(cars)
 #>  3rd Qu.:19.0   3rd Qu.: 56.00  
 #>  Max.   :25.0   Max.   :120.00
 ```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
