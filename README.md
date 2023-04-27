@@ -4,6 +4,9 @@
 # VMC
 
 <!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 Welcome to the homepage of `VMC` package!
@@ -29,17 +32,6 @@ Staphylococcus_haemolyticus, Veillonella_montpellierensis,
 Alistipes_finegoldii, Gardnerella_vaginalis, Mycoplasma_hominis,
 Mobiluncus_mulieris, Prevotella_buccalis and Sneathia_sanguinegens.
 
-It consists of 4 functions:
-
-- 3 internal
-  - get_data: this function extract a matrix from a phyloseq object
-  - clr_transformation: perform clr transformation (like microbiome
-    package)
-  - model_predict: use our trained model to predict the clusters
-- 1 available to the user
-  - get_cluster: uses inner functions to return the user’s original
-    object with cluster memberships added.
-
 ## Installation
 
 You only need to call `install_github` function in `devtools` to install
@@ -51,9 +43,8 @@ if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")
 BiocManager::install()
 install.packages("devtools")
-# Before installing VMC, you need also to install the dependent packages `phyloseq` and `glmnet`
+# Before installing VMC, you need also to install the dependent package `phyloseq`
 BiocManager::install("phyloseq")
-install.packages('glmnet')
 # Install VMC from github
 devtools::install_github("DiegoFE94/VMC")
 ```
@@ -64,16 +55,16 @@ Before starting the demonstration, you need to load the following
 packages:
 
     require(phyloseq)
-    require(glmnet)
 
 This is a basic example which shows you how to use the package:
 
 ``` r
+require(phyloseq)
+#> Loading required package: phyloseq
 library(VMC)
 data("example_pseq")
 # Load a pseq with 1657 samples 22 species and 7 taxonomic ranks
 print(example_pseq)
-#> Loading required package: phyloseq
 #> phyloseq-class experiment-level object
 #> otu_table()   OTU Table:         [ 22 taxa and 1657 samples ]
 #> sample_data() Sample Data:       [ 1657 samples by 25 sample variables ]

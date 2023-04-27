@@ -9,16 +9,45 @@
 #' as well as the label of the cluster with the highest probability of
 #' membership
 #'
-#' @importFrom glmnet glmnet_softmax
 #'
 #' @examples
 #' # Data from which you want to predict cluster labels
-#' print(example_matrix)
-#' em_clr <- clr_transformation(example_matrix)
-#' pred <- model_predict(example_matrix)
+#' require(VMC)
+#' em_clr <- VMC:::clr_transformation(example_matrix)
+#' pred <- VMC:::model_predict(example_matrix)
 #' # Probabilities and label for each sample
 #' print(pred)
 model_predict <- function(newdata){
+  # Declares glmnet function not exportable
+  glmnet_softmax <- function (x, ignore_labels = FALSE){
+    d <- dim(x)
+    dd <- dimnames(x)[[2]]
+    if (is.null(dd) || !length(dd))
+      ignore_labels = TRUE
+    nas = apply(is.na(x), 1, any)
+    if (any(nas)) {
+      pclass = rep(NA, d[1])
+      if (sum(nas) < d[1]) {
+        pclass2 = glmnet_softmax(x[!nas, ], ignore_labels)
+        pclass[!nas] = pclass2
+        if (is.factor(pclass2))
+          pclass = factor(pclass, levels = seq(d[2]), labels = levels(pclass2))
+      }
+    }
+    else {
+      maxdist <- x[, 1]
+      pclass <- rep(1, d[1])
+      for (i in seq(2, d[2])) {
+        l <- x[, i] > maxdist
+        pclass[l] <- i
+        maxdist[l] <- x[l, i]
+      }
+      dd <- dimnames(x)[[2]]
+      if (!ignore_labels)
+        pclass = factor(pclass, levels = seq(d[2]), labels = dd)
+    }
+    pclass
+  }
   # 1.Pre-processing of data for betas multiplication
   dd <- dim(newdata)
   if (inherits(newdata, "sparseMatrix"))
@@ -47,7 +76,7 @@ model_predict <- function(newdata){
                                nchar(colnames(response))-2)
   cp = aperm(dp, c(3, 1, 2))
   # Class
-  class <- apply(cp, 3, glmnet:::glmnet_softmax)
+  class <- apply(cp, 3, glmnet_softmax)
   #Bind both
   response$p_cluster <- class[,]
   return(response)

@@ -20,9 +20,9 @@ Util function to predict sample membership of each cluster class
 }
 \examples{
 # Data from which you want to predict cluster labels
-print(example_matrix)
-em_clr <- clr_transformation(example_matrix)
-pred <- model_predict(example_matrix)
+require(VMC)
+em_clr <- VMC:::clr_transformation(example_matrix)
+pred <- VMC:::model_predict(example_matrix)
 # Probabilities and label for each sample
 print(pred)
 }

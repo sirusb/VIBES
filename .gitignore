@@ -55,3 +55,6 @@ Icon?
 *.txt
 *.pdf
 *.svg
+inst/doc
+/doc/
+/Meta/

@@ -18,8 +18,8 @@ columns from a phyloseq object
 }
 \examples{
 # Original ASV table
-print(phyloseq::otu_table(example_pseq))
-m <- get_data(example_pseq)
+require(VMC)
+m <- VMC:::get_data(example_pseq)
 # Output matrix with taxas names instead ASVs names
 print(m)
 }

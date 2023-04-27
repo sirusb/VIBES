@@ -10,7 +10,7 @@ Authors@R: c(
     person(given = "Josel",
            family = "Liñares-Blanco",
            role = c("ctb"),
-           email = "joselb1993@gmail.com"),
+           email = "j.linares@udc.es"),
     person(given = "Carlos",
            family = "Fernandez-Lozano",
            role = c("ctb"),
@@ -22,11 +22,15 @@ Description: Model based on the glmnet algorithm to cluster the vaginal
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    glmnet,
+Imports:
+    magrittr,
     methods,
     phyloseq,
     utils
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
