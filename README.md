@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# VMC
+# VMC Vaginal Microbiome Cluistering
 
 <!-- badges: start -->
 
@@ -9,12 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-Welcome to the homepage of `VMC` package!
-
-This package computes clusters of biological significance from 20
+The `VMC` package computes clusters of biological significance from 20
 species from vaginal microbiome.
-
-## Description
 
 The package works with three types of input data: matrix, dataframe and
 phyloseq. In case the provided object is a phyloseq the package
@@ -34,11 +30,14 @@ Mobiluncus_mulieris, Prevotella_buccalis and Sneathia_sanguinegens.
 
 ## Installation
 
-You only need to call `install_github` function in `devtools` to install
-`VMC`. Be aware of package dependencies.
+The installation of `VMC` is done via GitHub. For this you need to
+install the `devtools` package via the function `install_github`. In
+addition `VMC` has dependencies via Bioconductor so it will be necessary
+to install the associated `BiocManager` package. This will allow you to
+install the `phyloseq` package.
 
 ``` r
-# Installation requires bioconductor and devtools, please use the following commands
+# Installation requires devtools and bioconductor, please use the following commands
 if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")
 BiocManager::install()
@@ -49,19 +48,21 @@ BiocManager::install("phyloseq")
 devtools::install_github("DiegoFE94/VMC")
 ```
 
-## Start
+## Usage
 
 Before starting the demonstration, you need to load the following
 packages:
-
-    require(phyloseq)
-
-This is a basic example which shows you how to use the package:
 
 ``` r
 require(phyloseq)
 #> Loading required package: phyloseq
 library(VMC)
+```
+
+This example works with a phyloseq object. In this case the phyloseq
+object is made up of the counts of 1657 microbiome profiles.
+
+``` r
 data("example_pseq")
 # Load a pseq with 1657 samples 22 species and 7 taxonomic ranks
 print(example_pseq)
@@ -86,6 +87,21 @@ otu_table(example_pseq)[1:5,1:5]
 #> SRR903842                         0                0
 #> SRR903941                         0                0
 #> SRR903945                         0                5
+tax_table(example_pseq)[1:5,6:7]
+#> Taxonomy Table:     [5 taxa by 2 taxonomic ranks]:
+#>                           Genus           Species                    
+#> Aerococcus_christensenii  "Aerococcus"    "Aerococcus_christensenii" 
+#> Alistipes_finegoldii      "Alistipes"     "Alistipes_finegoldii"     
+#> Atopobium_vaginae         "Atopobium"     "Atopobium_vaginae"        
+#> Campylobacter_ureolyticus "Campylobacter" "Campylobacter_ureolyticus"
+#> Finegoldia_magna          "Finegoldia"    "Finegoldia_magna"
+```
+
+Before running the package, the clinical data is made up of 25
+variables. Once the package is run, it will return 5 more variables that
+correspond to the probability and membership of each cluster.
+
+``` r
 # Sample data has no info about clusters
 sample_data(example_pseq)[1:5,20:25]
 #>           VAG_ITCH VAG_BURN VAG_DIS MENSTRU1 MENSTRU2 MENSTRU3
@@ -105,3 +121,24 @@ sample_data(pseq_w_clusters)[1:5,25:30]
 #> SRR903941       NA 4.992614e-26 1.0000000 1.369296e-10 8.586513e-09       IDN
 #> SRR903945       NA 3.820220e-24 0.9941218 1.527713e-07 5.878046e-03       IDN
 ```
+
+## Interpreting the results
+
+The `get_clusters()` function returns 5 variables/columns to the
+original object:
+
+1.  N: probability (0-1) of belonging to cluster N.
+2.  IDN: probability (0-1) of belonging to cluster IDN.
+3.  IDD: probability (0-1) of belonging to cluster IDD.
+4.  D: probability (0-1) of belonging to cluster D.
+5.  p_cluster: label (N, IDN, IDD, D) indicating to which cluster the
+    profile belongs
+
+## Contributing
+
+We welcome contributions to `VMC`. Please submit a pull request or open
+an issue on the GitHub repository.
+
+## License
+
+`VMC` is released under the MIT License.
