@@ -1,6 +1,6 @@
-Package: VMC
+Package: VIBES
 Type: Package
-Title: Vaginal Microbiome Cluster
+Title: VagInal Bacterial subtyping using machine learning for Enhanced classification of bacterial vaginosiS
 Version: 0.1.0
 Authors@R: c(
     person(given = "Diego",

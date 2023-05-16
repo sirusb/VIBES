@@ -11,8 +11,8 @@
 #'
 #' @examples
 #' # Original ASV table
-#' require(VMC)
-#' m <- VMC:::get_data(example_pseq)
+#' require(VIBES)
+#' m <- VIBES:::get_data(example_pseq)
 #' # Output matrix with taxas names instead ASVs names
 #' print(m)
 get_data <- function(pseq){

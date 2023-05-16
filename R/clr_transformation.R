@@ -11,8 +11,8 @@
 #'
 #' @examples
 #' # Original data
-#' require(VMC)
-#' em_clr <- VMC:::clr_transformation(example_matrix)
+#' require(VIBES)
+#' em_clr <- VIBES:::clr_transformation(example_matrix)
 #' # Transformed data
 #' print(em_clr)
 clr_transformation <- function(matrix){
