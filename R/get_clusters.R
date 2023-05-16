@@ -6,6 +6,7 @@
 #'
 #' @param object (phyloseq, matrix or data frame). In the case of the latter two,
 #' the samples in the rows and the species in the columns
+#' @param column (only for phyloseq) Input column number occupied by the taxonomic rank Species. Default is Null and take last column
 #'
 #' @return object (phyloseq, matrix or data frame). Same input class object with
 #' with the probabilities and the cluster membership label attached
@@ -15,16 +16,14 @@
 #'
 #' @examples
 #' # Original sample data (phyloseq case)
-#' print(phyloseq::sample_data(example_pseq))
-#' new_pseq <- get_clusters(example_pseq)
+#' print(phyloseq::sample_data(PRJNA208535))
+#' new_pseq <- get_clusters(PRJNA208535)
 #' # New sample data (phyloseq case)
 #' print(phyloseq::sample_data(new_pseq))
-#'  # Original sample data (matrix case)
-#' print(example_matrix)
-#' new_matrix <- get_clusters(example_matrix)
-#' # New sample data (matrix case)
-#' print(new_matrix)
-get_clusters <- function(object){
+get_clusters <- function(object, column = NULL){
+  # 0.Remember of species names
+  mssg <- "Remember that the species names must be in the following format: Genus_species"
+  cat(mssg, "\n")
   # 1.Check data class
   if (!(class(object)[1] %in% c("matrix", "data.frame", "phyloseq"))) {
     stop("Please use only matrix, dataframe or phyloseq object")
@@ -33,7 +32,7 @@ get_clusters <- function(object){
   # 2.If input object is a phyloseq load package and extract dataset in matrix
   # format. If input class is dataframe its transformed in matrix format
   if(class(object)[1] == "phyloseq"){
-    data <- get_data(pseq = object)
+    data <- get_data(pseq = object, column = column)
   }else if(class(object)[1] == "data.frame"){
     data <- matrix(object)
   }else if(class(object)[1] == "matrix"){
@@ -45,11 +44,12 @@ get_clusters <- function(object){
                       rownames(pruned_glmnet$nbeta$IDN),
                       rownames(pruned_glmnet$nbeta$IDD),
                       rownames(pruned_glmnet$nbeta$D)))[-1]
-  for (spp in species) {
-    if (!(spp %in% colnames(data))) {
-      stop(paste0("Specie '", spp, "' not found in input data"))
-    }
+  miss_sps <- setdiff(species, colnames(data))
+  if (length(miss_sps) > 0) {
+    stop("The following species are not present in the input data: ",
+         paste(miss_sps, collapse = ", "))
   }
+
   # 4.Retain species
   data <- data[,species]
 

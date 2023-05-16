@@ -4,6 +4,7 @@
 #' columns from a phyloseq object
 #'
 #' @param pseq Input phyloseq object
+#' @param column Input column number occupied by the taxonomic rank Species. Default is Null and take last column
 #'
 #' @return matrix. A matrix class with samples on rows and species in columns
 #'
@@ -12,12 +13,17 @@
 #' @examples
 #' # Original ASV table
 #' require(VIBES)
-#' m <- VIBES:::get_data(example_pseq)
+#' m <- VIBES:::get_data(PRJNA208535)
 #' # Output matrix with taxas names instead ASVs names
 #' print(m)
-get_data <- function(pseq){
-  # Ensure aglom by last level (species)
-  pseq <- phyloseq::tax_glom(pseq, utils::tail(colnames(pseq@tax_table), n = 1))
+get_data <- function(pseq, column = NULL){
+  # Aglom by species
+  if (is.null(x = column)) {
+    # Ensure aglom by last level (usually species)
+    pseq <- phyloseq::tax_glom(pseq, utils::tail(colnames(pseq@tax_table), n = 1))
+  }else{
+    pseq <- phyloseq::tax_glom(pseq, colnames(pseq@tax_table)[column])
+  }
   # Extract dataframe from phyloseq
   otu <- phyloseq::otu_table(pseq)
   if (phyloseq::taxa_are_rows(pseq) == TRUE){
@@ -25,6 +31,10 @@ get_data <- function(pseq){
   }
   df <- as.data.frame(otu)
   # Change otus names to their corresponding tax names
-  colnames(df) <- as.data.frame(phyloseq::tax_table(pseq))[,ncol(phyloseq::tax_table(pseq))]
+  if (is.null(x = column)) {
+    colnames(df) <- as.data.frame(phyloseq::tax_table(pseq))[,ncol(phyloseq::tax_table(pseq))]
+  }else{
+    colnames(df) <- as.data.frame(phyloseq::tax_table(pseq))[,column]
+  }
   return(as.matrix(df))
 }

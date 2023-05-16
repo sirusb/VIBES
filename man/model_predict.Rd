@@ -21,8 +21,8 @@ Util function to predict sample membership of each cluster class
 \examples{
 # Data from which you want to predict cluster labels
 require(VIBES)
-em_clr <- VIBES:::clr_transformation(example_matrix)
-pred <- VIBES:::model_predict(example_matrix)
+em_clr <- VIBES:::clr_transformation(PRJNA208535_matrix)
+pred <- VIBES:::model_predict(PRJNA208535_matrix)
 # Probabilities and label for each sample
 print(pred)
 }

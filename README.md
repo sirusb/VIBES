@@ -63,38 +63,32 @@ This example works with a phyloseq object. In this case the phyloseq
 object is made up of the counts of 1657 microbiome profiles.
 
 ``` r
-data("example_pseq")
+data("PRJNA208535")
 # Load a pseq with 1657 samples 22 species and 7 taxonomic ranks
-print(example_pseq)
+print(PRJNA208535)
 #> phyloseq-class experiment-level object
-#> otu_table()   OTU Table:         [ 22 taxa and 1657 samples ]
+#> otu_table()   OTU Table:         [ 6284 taxa and 1657 samples ]
 #> sample_data() Sample Data:       [ 1657 samples by 25 sample variables ]
-#> tax_table()   Taxonomy Table:    [ 22 taxa by 7 taxonomic ranks ]
-#> refseq()      DNAStringSet:      [ 22 reference sequences ]
+#> tax_table()   Taxonomy Table:    [ 6284 taxa by 7 taxonomic ranks ]
+#> refseq()      DNAStringSet:      [ 6284 reference sequences ]
 # Note that the otu table is made up of the counts
-otu_table(example_pseq)[1:5,1:5]
+otu_table(PRJNA208535)[1:5,1:5]
 #> OTU Table:          [5 taxa and 5 samples]
-#>                      taxa are columns
-#>           Aerococcus_christensenii Alistipes_finegoldii Atopobium_vaginae
-#> SRR902006                     5031                    0              2144
-#> SRR902881                       14                    0                 0
-#> SRR903842                        0                    0                 0
-#> SRR903941                       69                    0                 0
-#> SRR903945                       49                    0                29
-#>           Campylobacter_ureolyticus Finegoldia_magna
-#> SRR902006                         0              279
-#> SRR902881                         0                0
-#> SRR903842                         0                0
-#> SRR903941                         0                0
-#> SRR903945                         0                5
-tax_table(example_pseq)[1:5,6:7]
+#>                      taxa are rows
+#>      SRR902006 SRR902881 SRR903842 SRR903941 SRR903945
+#> ASV1         0         0         0         0         0
+#> ASV2    188890      3623         0         0         0
+#> ASV3         0         0         0         0         0
+#> ASV4         0         0      3345      1709       590
+#> ASV5         0         0         0         0         0
+tax_table(PRJNA208535)[1:5,6:7]
 #> Taxonomy Table:     [5 taxa by 2 taxonomic ranks]:
-#>                           Genus           Species                    
-#> Aerococcus_christensenii  "Aerococcus"    "Aerococcus_christensenii" 
-#> Alistipes_finegoldii      "Alistipes"     "Alistipes_finegoldii"     
-#> Atopobium_vaginae         "Atopobium"     "Atopobium_vaginae"        
-#> Campylobacter_ureolyticus "Campylobacter" "Campylobacter_ureolyticus"
-#> Finegoldia_magna          "Finegoldia"    "Finegoldia_magna"
+#>      Genus           Species              
+#> ASV1 "Lactobacillus" "Lactobacillus_iners"
+#> ASV2 "Lactobacillus" "Lactobacillus_iners"
+#> ASV3 "Lactobacillus" "Lactobacillus_iners"
+#> ASV4 "Lactobacillus" "Lactobacillus_iners"
+#> ASV5 "Lactobacillus" NA
 ```
 
 Before running the package, the clinical data is made up of 25
@@ -103,7 +97,7 @@ correspond to the probability and membership of each cluster.
 
 ``` r
 # Sample data has no info about clusters
-sample_data(example_pseq)[1:5,20:25]
+sample_data(PRJNA208535)[1:5,20:25]
 #>           VAG_ITCH VAG_BURN VAG_DIS MENSTRU1 MENSTRU2 MENSTRU3
 #> SRR902006       NA       NA      NA       NA       NA       NA
 #> SRR902881        0        0       0       NA       NA       NA
@@ -111,7 +105,8 @@ sample_data(example_pseq)[1:5,20:25]
 #> SRR903941        0        0       0       NA       NA       NA
 #> SRR903945        0        0       0       NA       NA       NA
 # Compute clusterization
-pseq_w_clusters <- get_clusters(object = example_pseq)
+pseq_w_clusters <- get_clusters(object = PRJNA208535)
+#> Remember that the species names must be in the following format: Genus_species
 # Check sample data of the new object 'pseq_w_clusters'
 sample_data(pseq_w_clusters)[1:5,25:30]
 #>           MENSTRU3        VCS.I    VCS.II      VCS.III       VCS.IV p_cluster

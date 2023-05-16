@@ -4,10 +4,12 @@
 \alias{get_data}
 \title{Get Data (from Phyloseq object)}
 \usage{
-get_data(pseq)
+get_data(pseq, column = NULL)
 }
 \arguments{
 \item{pseq}{Input phyloseq object}
+
+\item{column}{Input column number occupied by the taxonomic rank Species. Default is Null and take last column}
 }
 \value{
 matrix. A matrix class with samples on rows and species in columns
@@ -19,7 +21,7 @@ columns from a phyloseq object
 \examples{
 # Original ASV table
 require(VIBES)
-m <- VIBES:::get_data(example_pseq)
+m <- VIBES:::get_data(PRJNA208535)
 # Output matrix with taxas names instead ASVs names
 print(m)
 }

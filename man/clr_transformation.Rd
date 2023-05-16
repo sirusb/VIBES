@@ -21,7 +21,7 @@ experiments)
 \examples{
 # Original data
 require(VIBES)
-em_clr <- VIBES:::clr_transformation(example_matrix)
+em_clr <- VIBES:::clr_transformation(PRJNA208535_matrix)
 # Transformed data
 print(em_clr)
 }

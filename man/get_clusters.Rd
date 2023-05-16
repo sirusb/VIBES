@@ -4,11 +4,13 @@
 \alias{get_clusters}
 \title{Get Clusters}
 \usage{
-get_clusters(object)
+get_clusters(object, column = NULL)
 }
 \arguments{
 \item{object}{(phyloseq, matrix or data frame). In the case of the latter two,
 the samples in the rows and the species in the columns}
+
+\item{column}{(only for phyloseq) Input column number occupied by the taxonomic rank Species. Default is Null and take last column}
 }
 \value{
 object (phyloseq, matrix or data frame). Same input class object with
@@ -21,13 +23,8 @@ and the cluster membership label attached
 }
 \examples{
 # Original sample data (phyloseq case)
-print(phyloseq::sample_data(example_pseq))
-new_pseq <- get_clusters(example_pseq)
+print(phyloseq::sample_data(PRJNA208535))
+new_pseq <- get_clusters(PRJNA208535)
 # New sample data (phyloseq case)
 print(phyloseq::sample_data(new_pseq))
- # Original sample data (matrix case)
-print(example_matrix)
-new_matrix <- get_clusters(example_matrix)
-# New sample data (matrix case)
-print(new_matrix)
 }
