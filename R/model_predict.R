@@ -77,7 +77,17 @@ model_predict <- function(newdata){
   cp = aperm(dp, c(3, 1, 2))
   # Class
   class <- apply(cp, 3, glmnet_softmax)
-  #Bind both
+  # Bind both
   response$p_cluster <- class[,]
+  # 4.Renaming of clusters with final names
+  names(response)[names(response) == "N"] <- "VCS.I"
+  names(response)[names(response) == "IDN"] <- "VCS.II"
+  names(response)[names(response) == "IDD"] <- "VCS.III"
+  names(response)[names(response) == "D"] <- "VCS.IV"
+  # 4.Renaming of assigned cluster with final names
+  response$p_cluster[response$p_cluster == "N"] <- "VCS-I"
+  response$p_cluster[response$p_cluster == "IDN"] <- "VCS-II"
+  response$p_cluster[response$p_cluster == "IDD"] <- "VCS-III"
+  response$p_cluster[response$p_cluster == "D"] <- "VCS-IV"
   return(response)
 }

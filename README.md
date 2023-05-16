@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# VMC Vaginal Microbiome Cluistering
+# VIBES - VagInal Bacterial subtyping using machine learning for Enhanced classification of bacterial vaginosiS
 
 <!-- badges: start -->
 
@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The `VMC` package computes clusters of biological significance from 20
+The `VIBES` package computes clusters of biological significance from 20
 species from vaginal microbiome.
 
 The package works with three types of input data: matrix, dataframe and
@@ -30,11 +30,11 @@ Mobiluncus_mulieris, Prevotella_buccalis and Sneathia_sanguinegens.
 
 ## Installation
 
-The installation of `VMC` is done via GitHub. For this you need to
+The installation of `VIBES` is done via GitHub. For this you need to
 install the `devtools` package via the function `install_github`. In
-addition `VMC` has dependencies via Bioconductor so it will be necessary
-to install the associated `BiocManager` package. This will allow you to
-install the `phyloseq` package.
+addition `VIBES` has dependencies via Bioconductor so it will be
+necessary to install the associated `BiocManager` package. This will
+allow you to install the `phyloseq` package.
 
 ``` r
 # Installation requires devtools and bioconductor, please use the following commands
@@ -42,10 +42,10 @@ if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")
 BiocManager::install()
 install.packages("devtools")
-# Before installing VMC, you need also to install the dependent package `phyloseq`
+# Before installing VIBES, you need also to install the dependent package `phyloseq`
 BiocManager::install("phyloseq")
-# Install VMC from github
-devtools::install_github("DiegoFE94/VMC")
+# Install VIBES from github
+devtools::install_github("DiegoFE94/VIBES")
 ```
 
 ## Usage
@@ -56,7 +56,7 @@ packages:
 ``` r
 require(phyloseq)
 #> Loading required package: phyloseq
-library(VMC)
+library(VIBES)
 ```
 
 This example works with a phyloseq object. In this case the phyloseq
@@ -114,12 +114,12 @@ sample_data(example_pseq)[1:5,20:25]
 pseq_w_clusters <- get_clusters(object = example_pseq)
 # Check sample data of the new object 'pseq_w_clusters'
 sample_data(pseq_w_clusters)[1:5,25:30]
-#>           MENSTRU3            N       IDN          IDD            D p_cluster
-#> SRR902006       NA 2.883447e-18 0.9998651 3.257710e-06 1.315948e-04       IDN
-#> SRR902881       NA 7.292814e-24 1.0000000 9.895719e-12 8.154546e-10       IDN
-#> SRR903842       NA 2.211632e-20 1.0000000 3.602075e-10 1.755376e-08       IDN
-#> SRR903941       NA 4.992614e-26 1.0000000 1.369296e-10 8.586513e-09       IDN
-#> SRR903945       NA 3.820220e-24 0.9941218 1.527713e-07 5.878046e-03       IDN
+#>           MENSTRU3        VCS.I    VCS.II      VCS.III       VCS.IV p_cluster
+#> SRR902006       NA 2.883447e-18 0.9998651 3.257710e-06 1.315948e-04    VCS-II
+#> SRR902881       NA 7.292814e-24 1.0000000 9.895719e-12 8.154546e-10    VCS-II
+#> SRR903842       NA 2.211632e-20 1.0000000 3.602075e-10 1.755376e-08    VCS-II
+#> SRR903941       NA 4.992614e-26 1.0000000 1.369296e-10 8.586513e-09    VCS-II
+#> SRR903945       NA 3.820220e-24 0.9941218 1.527713e-07 5.878046e-03    VCS-II
 ```
 
 ## Interpreting the results
@@ -127,21 +127,21 @@ sample_data(pseq_w_clusters)[1:5,25:30]
 The `get_clusters()` function returns 5 variables/columns to the
 original object:
 
-1.  N: probability (0-1) of belonging to cluster N.
-2.  IDN: probability (0-1) of belonging to cluster IDN.
-3.  IDD: probability (0-1) of belonging to cluster IDD.
-4.  D: probability (0-1) of belonging to cluster D.
-5.  p_cluster: label (N, IDN, IDD, D) indicating to which cluster the
-    profile belongs
+1.  VCS.I: probability (0-1) of belonging to cluster VCS-I.
+2.  VCS.II: probability (0-1) of belonging to cluster VCS-II.
+3.  VCS.III: probability (0-1) of belonging to cluster VCS-III.
+4.  VCS.IV: probability (0-1) of belonging to cluster VCS-IV.
+5.  p_cluster: label (VCS-I, VCS-II, VCS-III, VCS-IV) indicating to
+    which cluster the profile belongs
 
 ## Contributing
 
-We welcome contributions to `VMC`. Please submit a pull request or open
-an issue on the GitHub repository.
+We welcome contributions to `VIBES`. Please submit a pull request or
+open an issue on the GitHub repository.
 
 ## License
 
-`VMC` is released under the MIT License.
+`VIBES` is released under the MIT License.
 
 ## Contact
 
