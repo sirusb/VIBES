@@ -13,7 +13,7 @@ Model based on the glmnet algorithm to cluster the vaginal microbiome profile fr
 
 Other contributors:
 \itemize{
-  \item Josel Liñares-Blanco \email{j.linares@udc.es} [contributor]
+  \item Jose Liñares-Blanco \email{j.linares@udc.es} [contributor]
   \item Carlos Fernandez-Lozano \email{carlos.fernandez@udc.es} [contributor]
 }
 

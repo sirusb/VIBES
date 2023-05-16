@@ -7,7 +7,7 @@ Authors@R: c(
            family = "Fernández-Edreira",
            role = c("aut", "cre", "cph"),
            email = "diego.fedreira@udc.es"),
-    person(given = "Josel",
+    person(given = "Jose",
            family = "Liñares-Blanco",
            role = c("ctb"),
            email = "j.linares@udc.es"),
