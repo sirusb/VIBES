@@ -17,9 +17,10 @@ object (phyloseq, matrix or data frame). Same input class object with
 with the probabilities and the cluster membership label attached
 }
 \description{
-Main function: from an input object (which can be a matrix, a data frame or
-a phyloseq), this function returned the same object with the probabilities
-and the cluster membership label attached.
+This function uses an elastic net model (trained with the knowledge extracted
+from previous cluster analyses) to predict the membership of the input samples
+to the VIBES clusters. Based on the 20 species raw counts, it assigns the samples
+to the VIBES clusters.
 }
 \examples{
 # Original sample data (phyloseq case)
