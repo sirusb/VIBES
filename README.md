@@ -10,7 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The `VIBES` package computes clusters of biological significance from 20
-species from vaginal microbiome.
+species from vaginal microbiome. The starting point is the raw counts of
+these species in each sample.
 
 The package works with three types of input data: matrix, dataframe and
 phyloseq. In case the provided object is a phyloseq the package
@@ -50,14 +51,21 @@ devtools::install_github("DiegoFE94/VIBES")
 
 ## Usage
 
-Before starting the demonstration, you need to load the following
-packages:
+Before starting, you need to load the following packages:
 
 ``` r
 require(phyloseq)
 #> Loading required package: phyloseq
 library(VIBES)
 ```
+
+The main function of the package is `get_VIBES()`. This function, from
+the input data (matrix, dataframe or phyloseq) computes the prediction
+of membership of these clusters. The function returns for each sample
+the probability of belonging to each cluster and the cluster label to
+which it belongs.
+
+## Example
 
 This example works with a phyloseq object. In this case the phyloseq
 object is made up of the counts of 1657 microbiome profiles.
@@ -105,7 +113,7 @@ sample_data(PRJNA208535)[1:5,20:25]
 #> SRR903941        0        0       0       NA       NA       NA
 #> SRR903945        0        0       0       NA       NA       NA
 # Compute clusterization
-pseq_w_clusters <- get_clusters(object = PRJNA208535)
+pseq_w_clusters <- get_VIBES(object = PRJNA208535)
 #> Remember that the species names must be in the following format: Genus_species
 # Check sample data of the new object 'pseq_w_clusters'
 sample_data(pseq_w_clusters)[1:5,25:30]
@@ -119,8 +127,8 @@ sample_data(pseq_w_clusters)[1:5,25:30]
 
 ## Interpreting the results
 
-The `get_clusters()` function returns 5 variables/columns to the
-original object:
+The `get_VIBES()` function returns 5 variables/columns to the original
+object:
 
 1.  VCS.I: probability (0-1) of belonging to cluster VCS-I.
 2.  VCS.II: probability (0-1) of belonging to cluster VCS-II.
@@ -128,6 +136,12 @@ original object:
 4.  VCS.IV: probability (0-1) of belonging to cluster VCS-IV.
 5.  p_cluster: label (VCS-I, VCS-II, VCS-III, VCS-IV) indicating to
     which cluster the profile belongs
+
+## Data
+
+The processed cohorts of the original
+[paper](https://github.com/DiegoFE94/BV_Microbiome/tree/main) are
+available in the data folder.
 
 ## Contributing
 

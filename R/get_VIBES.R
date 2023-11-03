@@ -1,8 +1,8 @@
-#' Get Clusters
+#' Get VIBES
 #'
 #' Main function: from an input object (which can be a matrix, a data frame or
 #' a phyloseq), this function returned the same object with the probabilities
-#' and the cluster membership label attached
+#' and the cluster membership label attached.
 #'
 #' @param object (phyloseq, matrix or data frame). In the case of the latter two,
 #' the samples in the rows and the species in the columns
@@ -17,10 +17,10 @@
 #' @examples
 #' # Original sample data (phyloseq case)
 #' print(phyloseq::sample_data(PRJNA208535))
-#' new_pseq <- get_clusters(PRJNA208535)
+#' new_pseq <- get_VIBES(PRJNA208535)
 #' # New sample data (phyloseq case)
 #' print(phyloseq::sample_data(new_pseq))
-get_clusters <- function(object, column = NULL){
+get_VIBES <- function(object, column = NULL){
   # 0.Remember of species names
   mssg <- "Remember that the species names must be in the following format: Genus_species"
   cat(mssg, "\n")
