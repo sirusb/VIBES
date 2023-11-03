@@ -9,17 +9,18 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The `VIBES` package computes clusters of biological significance from 20
-species from vaginal microbiome. The starting point is the raw counts of
-these species in each sample.
-
-The package works with three types of input data: matrix, dataframe and
+`VIBES` is a pretrained Elastic Net (glmnet) algorithm for classifying
+the vaginal microbiome into clusters of biological significance due to
+their species profile. `VIBES` directly works with the raw counts of
+vaginal microbiome species. From these counts, the samples are
+classified into 4 different clusters (VCS-I, VCS-II, VCS-III, VCS-IV).
+`VIBES` works with three types of input data: matrix, dataframe and
 phyloseq. In case the provided object is a phyloseq the package
 automatically extracts the matrix of interest to execute the rest. In
 case the object is a dataframe or a matrix the samples must be in the
 rows and the species in the columns.
 
-The 20 species used by the package are as follows, and regardless of the
+The 20 species used by `VIBES` are as follows, and regardless of the
 object passed must be named as such (`Genus_species`):
 Aerococcus_christensenii, Campylobacter_ureolyticus, Finegoldia_magna,
 Lactobacillus_crispatus, Lactobacillus_gasseri, Porphyromonas_uenonis,
