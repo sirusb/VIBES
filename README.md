@@ -47,7 +47,7 @@ install.packages("devtools")
 # Before installing VIBES, you need also to install the dependent package `phyloseq`
 BiocManager::install("phyloseq")
 # Install VIBES from github
-devtools::install_github("DiegoFE94/VIBES")
+devtools::install_github("MALL-Machine-Learning-in-Live-Sciences/VIBES")
 ```
 
 ## Usage
@@ -141,7 +141,7 @@ object:
 ## Data
 
 The processed cohorts of the original
-[paper](https://github.com/DiegoFE94/BV_Microbiome/tree/main) are
+[paper](https://github.com/MALL-Machine-Learning-in-Live-Sciences/BV_Microbiome) are
 available in the data folder.
 
 ## Contributing
