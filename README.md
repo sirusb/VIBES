@@ -1,3 +1,6 @@
+# Note
+ Cloned from the original [VIBES](https://github.com/MALL-Machine-Learning-in-Live-Sciences/VIBES/tree/main) repository.
+
 # VIBES - VagInal Bacterial subtyping using machine learning for Enhanced classification of bacterial vaginosiS
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10309596.svg)](https://doi.org/10.5281/zenodo.10309596)
