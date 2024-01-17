@@ -73,7 +73,7 @@ install.packages("devtools")
 BiocManager::install("phyloseq")
 
 # Install VIBES from github
-devtools::install_github("MALL-Machine-Learning-in-Live-Sciences/VIBES")
+devtools::install_github("sirusb/VIBES")
 ```
 
 ## Usage

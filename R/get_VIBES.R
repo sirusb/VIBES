@@ -47,12 +47,21 @@ get_VIBES <- function(object, column = NULL){
                       rownames(pruned_glmnet$nbeta$D)))[-1]
   miss_sps <- setdiff(species, colnames(data))
   if (length(miss_sps) > 0) {
-    stop("The following species are not present in the input data: ",
-         paste(miss_sps, collapse = ", "))
+    warning("The following species are not present in the input data: ", paste(miss_sps, collapse = ", "))
   }
 
+  detected_species = intersect(species, colnames(data))
+  
+
+  mat1 = data[,detected_species]
+
+  mat2 = matrix(0, nrow = nrow(mat1), ncol = length(miss_sps))
+  colnames(mat2) = miss_sps
+  rownames(mat2) = rownames(data)
+  
   # 4.Retain species
-  data <- data[,species]
+  data = cbind(mat1, mat2)
+
 
   # 5.CLR transformation
   data <- clr_transformation(matrix = data)

@@ -36,5 +36,6 @@ get_data <- function(pseq, column = NULL){
   }else{
     colnames(df) <- as.data.frame(phyloseq::tax_table(pseq))[,column]
   }
+  colnames(df) = gsub('[kdpcogfs]__',"",colnames(df))
   return(as.matrix(df))
 }
